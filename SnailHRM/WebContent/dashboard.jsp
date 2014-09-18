@@ -8,8 +8,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<s:form>
-<s:textfield name='test' label='test'/>
-</s:form>
+<!-- Test for first check In -->
+<h1>Dash Board</h1>
 </body>
 </html>
