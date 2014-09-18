@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.snailark.snailhrm.dao">
+	<class name="AddDepartmentVO" table="ADD_DEPARTMENT">
+		<meta attribute="class-description">
+			This class contains department's detail.
+		</meta>
+		<id name="id" type="int" column="ID">
+			<generator class="increment" />
+		</id>
+		<property name="departmentName" column="DEPARTMENT_NAME"
+			type="string" />
+		<property name="notes" column="NOTES" type="string" />
+	</class>
+</hibernate-mapping>
