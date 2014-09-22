@@ -17,13 +17,16 @@ public abstract class DataAccessObject {
 	}
 
 	public void save(ValueObject parentVO) {
+		// save object to DB.
 		SessionFactory factory = HibernateUtils.getFactoryObject();
 		Session session = factory.getCurrentSession();
 		session.save(parentVO);
-		// Save object to database
+		
+		
+		
 	}
 
-	public void update(ValueObject parentVO) throws SystemException {
+	public void update(ValueObject parentVO) throws SystemException{
 		try {
 		// Update object to database
 		SessionFactory factory = HibernateUtils.getFactoryObject();
