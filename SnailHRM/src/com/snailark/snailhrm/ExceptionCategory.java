@@ -1,7 +1,9 @@
 package com.snailark.snailhrm;
 
 public enum ExceptionCategory {
-	SYSTEM("System Error: Contact to your system administrator"), BIZ("Bisuness Exception");
+	SYSTEM("System Error: Contact to your system administrator"), 
+	BIZ("Bisuness Exception"),
+	DATABASE_UPDATE_EXCEPTION("Error while updating the record in database.");
 
 	private String message;
 
