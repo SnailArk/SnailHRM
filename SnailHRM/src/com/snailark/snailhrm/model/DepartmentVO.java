@@ -3,7 +3,7 @@ package com.snailark.snailhrm.model;
 public class DepartmentVO extends ValueObject {
 	private String departmentName;
 	private String notes;
-
+	
 	public String getDepartmentName() {
 		return departmentName;
 	}

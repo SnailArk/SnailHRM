@@ -1,5 +1,6 @@
 package com.snailark.snailhrm.dao;
 
+
 import java.util.List;
 
 import org.hibernate.Criteria;
@@ -8,10 +9,13 @@ import org.hibernate.Session;
 import com.snailark.snailhrm.model.DepartmentVO;
 import com.snailark.snailhrm.util.HibernateUtils;
 
+import com.snailark.snailhrm.model.DepartmentVO;
+
+
 public class DepartmentDAO extends DataAccessObject {
 	
-	public DepartmentDAO(Class classReference) {
-		super(classReference);
+	public DepartmentDAO() {
+		super(DepartmentVO.class);
 	}
 
 	
