@@ -32,5 +32,7 @@ public abstract class DataAccessObject {
 	public void delete(ValueObject parentVO) {
 		// Delete a record
 	}
+	
+		
 
 }
