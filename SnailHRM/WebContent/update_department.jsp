@@ -8,10 +8,10 @@
 <title>Snail Human Resource Management</title>
 </head>
 <body>
-	<s:actionerror/>
-	<h2>Add department here</h2>
-	<!--  Add department form -->
-	<s:form action="addDepartment">
+	<h2>Update department here</h2>
+	<!--  Update department form -->
+	<s:form action="updateDepartment">
+	    <s:hidden name="departmentVO.id"></s:hidden>
 		<s:textfield name="departmentVO.departmentName"
 			label="Department Name" />
 		<s:textarea name="departmentVO.notes" label="Notes " rows="10" />

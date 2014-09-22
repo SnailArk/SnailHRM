@@ -1,12 +1,10 @@
 package com.snailark.snailhrm.web.action;
 
-import com.snailark.snailhrm.BizException;
 import com.snailark.snailhrm.SystemException;
 import com.snailark.snailhrm.model.DepartmentVO;
 import com.snailark.snailhrm.service.ConfigurationService;
 
-public class AddDepartmentAction extends BaseActionSupport {
-
+public class UpdateDepartmentAction extends BaseActionSupport {
 	private static final long serialVersionUID = 1L;
 
 	// DepartmentVO reference interact by struts
@@ -24,15 +22,15 @@ public class AddDepartmentAction extends BaseActionSupport {
 	public String execute() {
 		if (SUBMIT.equals("submit")) {
 			ConfigurationService configurationService = new ConfigurationService();
-				try {
-				configurationService.addDepartment(departmentVO);
-				return SUCCESS;
-				} catch (SystemException se) {
-					addActionError(se.getExceptionCategory().getMessage());
-					return ERROR;
-				}
+			try {
+				configurationService.updateDepartment(departmentVO);
+			} catch (SystemException e) {
+				addActionError("Error while saving the department.");
+				return ERROR;
+			}
+			return SUCCESS;
 		}
-		return "addDepartment";
+		return ERROR;
 	}
 
 	@Override
@@ -51,4 +49,5 @@ public class AddDepartmentAction extends BaseActionSupport {
 			addFieldError("departmentVO.notes", "Notes cannot be blank");
 		}
 	}
+
 }
