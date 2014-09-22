@@ -20,6 +20,7 @@
 
 		<!-- Echo all executed SQL to stdout -->
 		<property name="show_sql">true</property>
+		<property name="current_session_context_class">thread</property>
 
 		<!-- Mapping files -->
 		<mapping resource="com/snailark/snailhrm/dao/department.hbm.xml" />

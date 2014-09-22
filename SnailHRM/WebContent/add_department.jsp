@@ -5,14 +5,16 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>Snail Human Resource Management</title>
 </head>
 <body>
-<!--  Add user form -->
-<s:form action="addDepartment">
-  <s:textfield name="departmentVO.departmentName" label="Department Name"/>
-  <s:textarea name="departmentVO.notes" label="Notes " rows="10"/>
-  <s:submit name="submit" value="submit"/>
-</s:form>
+	<h2>Add department here</h2>
+	<!--  Add department form -->
+	<s:form action="addDepartment">
+		<s:textfield name="departmentVO.departmentName"
+			label="Department Name" />
+		<s:textarea name="departmentVO.notes" label="Notes " rows="10" />
+		<s:submit name="submit" value="submit" />
+	</s:form>
 </body>
 </html>
