@@ -26,7 +26,7 @@ public class AddDepartmentAction extends BaseActionSupport {
 			return SUCCESS;
 
 		}
-		return SUCCESS;
+		return ERROR;
 	}
 
 	
