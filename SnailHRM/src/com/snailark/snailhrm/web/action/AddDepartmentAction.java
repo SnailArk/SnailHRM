@@ -13,6 +13,15 @@ public class AddDepartmentAction extends BaseActionSupport {
 
 	// DepartmentVO reference interact by struts
 	private DepartmentVO departmentVO;
+	int id;
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
 
 	public DepartmentVO getDepartmentVO() {
 		return departmentVO;
@@ -28,6 +37,7 @@ public class AddDepartmentAction extends BaseActionSupport {
 			ConfigurationService configurationService = new ConfigurationService();
 			try {
 				configurationService.addDepartment(departmentVO);
+				this.setId(departmentVO.getId());
 				return SUCCESS;
 			} catch (BizException se) {
 				addActionError(se.getExceptionCategory().getMessage());

@@ -6,14 +6,18 @@
 	<package name="default" extends="struts-default">
 		<action name="addDepartment"
 			class="com.snailark.snailhrm.web.action.AddDepartmentAction" method="execute">
-			<result name="success">/update_department.jsp</result>
+			<result name="success" type="redirectAction">
+				<param name="id">${id}</param>
+				<param name="actionName">updateDepartment</param>
+			</result>
 			<result name="error">/add_department.jsp</result>
 			<result name="input">/add_department.jsp</result>
 			<result name="addDepartment">/add_department.jsp</result>
 		</action>
-		
+
 		<action name="updateDepartment"
-			class="com.snailark.snailhrm.web.action.UpdateDepartmentAction" method="execute">
+			class="com.snailark.snailhrm.web.action.UpdateDepartmentAction"
+			method="execute">
 			<result name="success">dashboard.jsp</result>
 			<result name="error">/add_department.jsp</result>
 			<result name="input">/add_department.jsp</result>
