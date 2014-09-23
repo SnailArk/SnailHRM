@@ -18,7 +18,7 @@
 		<center>
 		<div id="addBox">
 			<div class="heading">
-				<b>Add department here</b>
+				<b><div Style="padding: 9px;">Add department here</div></b>
 			</div>
 			<s:actionerror />
 			<!--  Add department form -->

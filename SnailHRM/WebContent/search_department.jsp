@@ -12,38 +12,69 @@
 </head>
 <body>
 	<div id="header">
-	 <%@include file="./header.jsp" %>
+		<%@include file="./header.jsp"%>
 	</div>
 	<div id="container">
-		<center>
+<center>
+	<div id="searchBox">
+				<div class=heading>
+					<b><div Style="padding: 9px;">
+							Departments List (
+							<s:property value="listDepartment.size" />
+							) <span style="margin: 317px;"></span> <a href="addDepartment">add</a></b>
+				</div>
+			</div>
+		<span style="padding: 1px;"></span>	
+		<table class="heading" align="center" style=" width : 100%; overflow: hidden;">
+			<tr>
+				<th width="40%">Department Name</th>
+				<th width="40%">Notes</th>
+				<th width="20%">Action</th>
+			</tr>
+			<s:iterator value='listDepartment' status="rowstatus">
+				<tr class="<s:if test="#rowstatus.odd == true ">odd</s:if><s:else>even</s:else>" >
+					<td width="40%" ><s:property value='departmentName' /></td>
+					<td width="40%" ><s:property value='notes' /></td>
+					<td width="20%" ><a href="updateDepartment?id=<s:property value="id"/>"><img src="./images/edit_img.png"></a></td>
+				</tr>
+			</s:iterator>
+		</table>
+
+		<%-- 		
+			<div id="searchBox">
+				<div class=heading>
+					<b><div Style="padding: 9px;">
+							Departments List(
+							<s:property value="listDepartment.size" />
+							) <span style="margin: 317px;"></span> <a href="addDepartment">add</a></b>
+				</div>
+			</div>
+
 
 			<div>
-				Departments List(
-				<s:property value="listDepartment.size" />
-				)
+				<b>Department Name</b><span class="columnSpace"></span><b>Notes</b><span
+					class="columnSpace"></span><b>Action</b>
 			</div>
-			<div>
-				<a href="addDepartment">add</a>
-			</div>
-			<div>
-				<table align='center' border='1'>
-					<tr>
-						<th>Department Name</th>
-						<th>Notes</th>
-					</tr>
-					<s:iterator value='listDepartment'>
-						<tr>
-							<td><s:property value='departmentName' /></td>
-							<td><s:property value='notes' /></td>
-						</tr>
-					</s:iterator>
-				</table>
-			</div>
-		</center>
+
+			<s:iterator value='listDepartment' status="rowStatus">
+				<div class="<s:if test="#rowstatus.odd == true ">odd</s:if><s:else>even</s:else>" >
+								
+					<s:property value='departmentName' />
+					<span class="columnSpaceData"></span>
+					<s:property value='notes' />
+					<span class="columnSpaceData"></span> 
+				</div>
+			
+			</s:iterator>
+ 
 	</div>
+	</div>
+--%>	</center>
+	</div>
+
 	<div id="footer">
-		 <%@include file="./footer.jsp" %>
-	
+		<%@include file="./footer.jsp"%>
+
 	</div>
 </body>
 </html>

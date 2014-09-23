@@ -22,7 +22,7 @@
 			<result name="error">/add_department.jsp</result>
 			<result name="input">/add_department.jsp</result>
 		</action>
-		<action name="searchdepartment"
+		<action name="searchDepartment"
 			class="com.snailark.snailhrm.web.action.SearchDepartmentAction"
 			method="execute">
 			<result name="success">search_department.jsp</result>
