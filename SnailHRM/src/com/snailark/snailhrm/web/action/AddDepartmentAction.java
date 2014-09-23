@@ -1,5 +1,7 @@
 package com.snailark.snailhrm.web.action;
 
+import org.apache.commons.lang.StringUtils;
+
 import com.snailark.snailhrm.BizException;
 import com.snailark.snailhrm.SystemException;
 import com.snailark.snailhrm.model.DepartmentVO;
@@ -22,33 +24,31 @@ public class AddDepartmentAction extends BaseActionSupport {
 
 	@Override
 	public String execute() {
-		if (SUBMIT.equals("submit")) {
+		if ((getSubmit() != null) && SUBMIT.equals(getSubmit())) {
 			ConfigurationService configurationService = new ConfigurationService();
-				try {
+			try {
 				configurationService.addDepartment(departmentVO);
 				return SUCCESS;
-				} catch (SystemException se) {
-					addActionError(se.getExceptionCategory().getMessage());
-					return ERROR;
-				}
+			} catch (BizException se) {
+				addActionError(se.getExceptionCategory().getMessage());
+				return ERROR;
+			}
 		}
 		return "addDepartment";
 	}
 
 	@Override
 	public void validate() {
-		// TODO Auto-generated method stub
-		// validation for department name field
-		if (departmentVO.getDepartmentName() == null
-				|| "".equals(departmentVO.getDepartmentName())) {
-			addFieldError("departmentVO.departmentName",
-					"Department name cannot blank");
+		super.validate();
+		if (SUBMIT.equals(getSubmit())) {
+			if (StringUtils.isEmpty(departmentVO.getDepartmentName())) {
+				addFieldError("departmentVO.departmentName", "Please enter department name");
+			} else {
+				if (!StringUtils.isAlphaSpace(departmentVO.getDepartmentName())) {
+					addFieldError("departmentVO.departmentName", "Department name cannot contain numeric and special characters");
+				}
+			}
 		}
 
-		// validation fot notes field
-		if (departmentVO.getNotes() == null
-				|| "".equals(departmentVO.getNotes())) {
-			addFieldError("departmentVO.notes", "Notes cannot be blank");
-		}
 	}
 }

@@ -1,5 +1,7 @@
 package com.snailark.snailhrm.web.action;
 
+import org.apache.commons.lang.StringUtils;
+
 import com.snailark.snailhrm.SystemException;
 import com.snailark.snailhrm.model.DepartmentVO;
 import com.snailark.snailhrm.service.ConfigurationService;
@@ -35,19 +37,18 @@ public class UpdateDepartmentAction extends BaseActionSupport {
 
 	@Override
 	public void validate() {
-		// TODO Auto-generated method stub
-		// validation for department name field
-		if (departmentVO.getDepartmentName() == null
-				|| "".equals(departmentVO.getDepartmentName())) {
-			addFieldError("departmentVO.departmentName",
-					"Department name cannot blank");
+		super.validate();
+		if (SUBMIT.equals(getSubmit())) {
+			if (StringUtils.isEmpty(departmentVO.getDepartmentName())) {
+				addFieldError("departmentVO.getDepartmentName()",
+						"Please enter department name");
+			} else {
+				if (!StringUtils.isAlphaSpace(departmentVO.getDepartmentName())) {
+					addFieldError("departmentVO.getDepartmentName()",
+							"Please enter department name correctly");
+				}
+			}
 		}
 
-		// validation fot notes field
-		if (departmentVO.getNotes() == null
-				|| "".equals(departmentVO.getNotes())) {
-			addFieldError("departmentVO.notes", "Notes cannot be blank");
-		}
 	}
-
 }

@@ -2,9 +2,11 @@ package com.snailark.snailhrm.service;
 
 import java.util.List;
 
+
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import com.snailark.snailhrm.BizException;
 import com.snailark.snailhrm.SystemException;
 import com.snailark.snailhrm.facade.ConfigurationFacade;
 import com.snailark.snailhrm.model.DepartmentVO;
@@ -12,7 +14,7 @@ import com.snailark.snailhrm.util.HibernateUtils;
 
 public class ConfigurationService {
 
-	public void addDepartment(DepartmentVO departmentVO) throws SystemException {
+	public void addDepartment(DepartmentVO departmentVO) throws BizException {
 		Session session = HibernateUtils.getFactoryObject().getCurrentSession();
 		Transaction transaction = session.beginTransaction();
 		ConfigurationFacade configurationFacade = new ConfigurationFacade();
@@ -20,9 +22,9 @@ public class ConfigurationService {
 			
 			configurationFacade.addDepartment(departmentVO);
 			transaction.commit();
-		} catch(SystemException se) {
+		} catch(BizException be) {
 				transaction.rollback();
-				throw se;
+				throw be;
 		}
 	}
 
