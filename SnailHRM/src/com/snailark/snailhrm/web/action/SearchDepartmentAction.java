@@ -29,7 +29,6 @@ public class SearchDepartmentAction extends BaseActionSupport {
 	public String execute() {
 		ConfigurationService configurationService = new ConfigurationService();
 		listDepartment =  configurationService.searchDepartment();
-		
 		return SUCCESS;
 	}
 	
