@@ -26,20 +26,23 @@ public class DepartmentDAO extends DataAccessObject {
 		List<DepartmentVO> departmentsList = criteria.list();
 		return departmentsList;
 	}
-	public boolean searchByDepartmentName(DepartmentVO departmentVO) {
+	
+	public DepartmentVO searchByDepartmentName(DepartmentVO departmentVO) {
+		DepartmentVO savedVO  = null;
 		Session session = HibernateUtils.getFactoryObject().getCurrentSession();
 		Criteria criteria = session.createCriteria(DepartmentVO.class);
 		Criterion criterion = Restrictions.ilike("departmentName", departmentVO.getDepartmentName());
 	    criteria.add(criterion);
-	    List<DepartmentVO> result = criteria.list();
-	    Boolean value = true;
-	    if(result.isEmpty()) {
-	    	return value;
+	    List<DepartmentVO> departmentVOList = criteria.list();
+	    if(!departmentVOList.isEmpty()){
+	    	savedVO = departmentVOList.get(0);
 	    }
-	    else {
-	    	value = false;
-	    	return value;
-	    }
+	    return savedVO;
 	}
+	
+	
+	
+	
+	
 	
 }

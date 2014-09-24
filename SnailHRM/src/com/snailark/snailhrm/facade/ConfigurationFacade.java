@@ -14,7 +14,7 @@ public class ConfigurationFacade {
 
 	public void addDepartment(DepartmentVO departmentVO) throws BizException {
 		DepartmentDAO departmentDAO = new DepartmentDAO();
-		if (departmentDAO.searchByDepartmentName(departmentVO)) {
+		if (departmentDAO.searchByDepartmentName(departmentVO) == null) {
 			departmentDAO.save(departmentVO);
 		}
 		else {
@@ -29,8 +29,24 @@ public class ConfigurationFacade {
 	}
 
 
-	public void updateDepartment(DepartmentVO departmentVO) throws SystemException {
-		DataAccessObject parentDAO = new DepartmentDAO();
-		parentDAO.update(departmentVO);
+	public void updateDepartment(DepartmentVO departmentVO) throws SystemException, BizException {
+		DepartmentDAO departmentDAO = new DepartmentDAO();
+		DepartmentVO savedVO = departmentDAO.searchByDepartmentName(departmentVO);
+		
+		if(savedVO == null){
+			departmentDAO.update(departmentVO);
+		} else if(savedVO.getId() == departmentVO.getId() ) {
+			savedVO.setDepartmentName(departmentVO.getDepartmentName());
+			savedVO.setNotes(departmentVO.getNotes());
+			departmentDAO.update(savedVO);
+		} else {
+			throw new BizException(ExceptionCategory.DEPARTMENT_ALREADY_EXISTS);
+		}
+	}
+	
+	public DepartmentVO findDepartmentById(DepartmentVO departmentVO){
+		
+		   DepartmentDAO departmentDAO = new DepartmentDAO();
+		   return (DepartmentVO)departmentDAO.findById(departmentVO);
 	}
 }

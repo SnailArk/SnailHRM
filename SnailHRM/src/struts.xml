@@ -18,9 +18,10 @@
 		<action name="updateDepartment"
 			class="com.snailark.snailhrm.web.action.UpdateDepartmentAction"
 			method="execute">
-			<result name="success">dashboard.jsp</result>
-			<result name="error">/add_department.jsp</result>
-			<result name="input">/add_department.jsp</result>
+			<result name="success">/dashboard.jsp</result>
+			<result name="update">/update_department.jsp</result>
+			<result name="error">/update_department.jsp</result>
+			<result name="input">/update_department.jsp</result>
 		</action>
 		<action name="searchDepartment"
 			class="com.snailark.snailhrm.web.action.SearchDepartmentAction"
