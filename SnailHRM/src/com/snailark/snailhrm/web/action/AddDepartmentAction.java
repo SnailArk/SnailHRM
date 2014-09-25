@@ -2,8 +2,8 @@ package com.snailark.snailhrm.web.action;
 
 import org.apache.commons.lang.StringUtils;
 
+
 import com.snailark.snailhrm.BizException;
-import com.snailark.snailhrm.SystemException;
 import com.snailark.snailhrm.model.DepartmentVO;
 import com.snailark.snailhrm.service.ConfigurationService;
 
@@ -52,7 +52,7 @@ public class AddDepartmentAction extends BaseActionSupport {
 		super.validate();
 		if (SUBMIT.equals(getSubmit())) {
 			if (StringUtils.isEmpty(departmentVO.getDepartmentName())) {
-				addFieldError("departmentVO.departmentName", "Please enter department name");
+				addFieldError("departmentVO.departmentName", "Department name cannot be blank.");
 			} else {
 				if (!StringUtils.isAlphaSpace(departmentVO.getDepartmentName())) {
 					addFieldError("departmentVO.departmentName", "Department name cannot contain numeric and special characters");

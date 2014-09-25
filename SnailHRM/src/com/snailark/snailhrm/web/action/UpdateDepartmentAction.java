@@ -1,6 +1,5 @@
 package com.snailark.snailhrm.web.action;
 
-import javax.swing.plaf.synth.SynthOptionPaneUI;
 
 import org.apache.commons.lang.StringUtils;
 
@@ -69,12 +68,12 @@ public class UpdateDepartmentAction extends BaseActionSupport {
 		super.validate();
 		if (SUBMIT.equals(getSubmit())) {
 			if (StringUtils.isEmpty(departmentVO.getDepartmentName())) {
-				addFieldError("departmentVO.getDepartmentName()",
-						"Please enter department name");
+				addFieldError("departmentVO.departmentName",
+						"Department name cannot be blank.");
 			} else {
 				if (!StringUtils.isAlphaSpace(departmentVO.getDepartmentName())) {
-					addFieldError("departmentVO.getDepartmentName()",
-							"Please enter department name correctly");
+					addFieldError("departmentVO.departmentName",
+							"Department name cannot contain numeric and special characters");
 				}
 			}
 		}
