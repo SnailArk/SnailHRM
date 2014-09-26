@@ -38,6 +38,10 @@
 			<result name="input">/add_role.jsp</result>
 			<result name="addRole">/add_role.jsp</result>
 		</action>
-		
+		<action name="searchRole"
+			class="com.snailark.snailhrm.web.action.SearchRoleAction"
+			method="execute">
+			<result name="success">search_role.jsp</result>
+		</action>		
 	</package>
 </struts>

@@ -70,5 +70,15 @@ public class ConfigurationService {
 			throw be;
 		}
 	}
+	
+	public List<RoleVO> searchList() {
+		Session session = HibernateUtils.getFactoryObject().getCurrentSession();
+		Transaction transaction = session.beginTransaction();
+		ConfigurationFacade configurationFacade = new ConfigurationFacade();
+		List<RoleVO> roleList = configurationFacade.searchRole();
+		transaction.commit();
+		return roleList;
+
+	}
 
 }
