@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.snailark.snailhrm.model">
+	<class name="RoleVO" table="role">
+		<meta attribute="class-description">
+			This class contains Role's detail.
+		</meta>
+		<id name="id" type="int" column="ID">
+			<generator class="increment" />
+		</id>
+		<property name="roleName" column="ROLE_NAME" type="string" />
+		<property name="roleDescription" column="ROLE_DESCRIPTION" type="string" />
+		<property name="createdDate" column="CREATED_DATE" type="date" />
+	</class>
+</hibernate-mapping>

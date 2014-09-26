@@ -6,9 +6,10 @@ import java.util.List;
 import com.snailark.snailhrm.BizException;
 import com.snailark.snailhrm.ExceptionCategory;
 import com.snailark.snailhrm.SystemException;
-import com.snailark.snailhrm.dao.DataAccessObject;
 import com.snailark.snailhrm.dao.DepartmentDAO;
+import com.snailark.snailhrm.dao.RoleDAO;
 import com.snailark.snailhrm.model.DepartmentVO;
+import com.snailark.snailhrm.model.RoleVO;
 
 public class ConfigurationFacade {
 
@@ -49,4 +50,15 @@ public class ConfigurationFacade {
 		   DepartmentDAO departmentDAO = new DepartmentDAO();
 		   return (DepartmentVO)departmentDAO.findById(departmentVO);
 	}
+	
+	public void addRole(RoleVO roleVO) throws BizException {
+		RoleDAO roleDAO = new RoleDAO();
+		if (roleDAO.searchByRoleName(roleVO) == null) {
+			roleDAO.save(roleVO);
+		}
+		else {
+			throw new BizException(ExceptionCategory.ROLE_ALREADY_EXISTS);
+		}
+	}
+	
 }

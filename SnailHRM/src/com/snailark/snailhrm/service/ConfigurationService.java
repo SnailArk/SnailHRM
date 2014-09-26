@@ -7,9 +7,9 @@ import org.hibernate.Transaction;
 
 import com.snailark.snailhrm.BizException;
 import com.snailark.snailhrm.SystemException;
-import com.snailark.snailhrm.dao.DepartmentDAO;
 import com.snailark.snailhrm.facade.ConfigurationFacade;
 import com.snailark.snailhrm.model.DepartmentVO;
+import com.snailark.snailhrm.model.RoleVO;
 import com.snailark.snailhrm.util.HibernateUtils;
 
 public class ConfigurationService {
@@ -57,6 +57,18 @@ public class ConfigurationService {
 		return departmentVO2;
 	}
 	
-	
+	public void addRole(RoleVO roleVO) throws BizException {
+		Session session = HibernateUtils.getFactoryObject().getCurrentSession();
+		Transaction transaction = session.beginTransaction();
+		ConfigurationFacade configurationFacade = new ConfigurationFacade();
+		try {
+
+			configurationFacade.addRole(roleVO);
+			transaction.commit();
+		} catch (BizException be) {
+			transaction.rollback();
+			throw be;
+		}
+	}
 
 }
