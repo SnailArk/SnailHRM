@@ -30,4 +30,12 @@ public class RoleDAO extends DataAccessObject {
 	    }
 	    return savedVO;
 	}
+	
+	public List<RoleVO> searchRole() {
+		
+		Session session = HibernateUtils.getFactoryObject().getCurrentSession();
+		Criteria criteria = session.createCriteria(RoleVO.class);
+		List<RoleVO> roleList = criteria.list();
+		return roleList;
+	}
 }

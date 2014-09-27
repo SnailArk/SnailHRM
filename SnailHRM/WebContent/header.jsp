@@ -10,7 +10,7 @@
 		<ul class="menu">
 			<li><a href="dashboard.jsp" class="parent"><span>Dashboard</span></a>
 			</li>
-			<li><a href="searchDepartment" class="parent"><span>Configuration</span></a>
+			<li><a href="#" class="parent"><span>Configuration</span></a>
 				<div>
 					<ul>
 						<li><a href="addDepartment" class="parent"><span>Add
@@ -19,7 +19,7 @@
 									Deparment</span></a>
 					</ul>
 				</div></li>
-			<li><a href="searchDepartment" class="parent"><span>Role</span></a>
+			<li><a href="#" class="parent"><span>Role</span></a>
 				<div>
 					<ul>
 						<li><a href="addRole" class="parent"><span>Add

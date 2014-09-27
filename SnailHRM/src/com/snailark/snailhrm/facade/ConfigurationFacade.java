@@ -80,4 +80,10 @@ public class ConfigurationFacade {
 		return (RoleVO) roleDAO.findById(roleVO);
 	}
 	
+	public List<RoleVO> searchRole() {
+		RoleDAO roleDAO = new RoleDAO();
+		List<RoleVO> searchedRoleName = roleDAO.searchRole();
+		return searchedRoleName;
+	}
+	
 }
