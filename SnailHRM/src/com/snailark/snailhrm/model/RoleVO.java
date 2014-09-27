@@ -6,6 +6,7 @@ public class RoleVO extends ValueObject {
 	private String roleName;
 	private String roleDescription;
 	private Date createdDate;
+	
 	public Date getCreatedDate() {
 		return createdDate;
 	}

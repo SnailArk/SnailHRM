@@ -17,6 +17,4 @@ public abstract class BaseActionSupport extends ActionSupport {
 	public void setSubmit(String submit) {
 		this.submit = submit;
 	}
-	
-
 }

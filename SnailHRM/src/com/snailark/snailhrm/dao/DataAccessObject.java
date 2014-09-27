@@ -9,7 +9,6 @@ import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Restrictions;
 
-import com.snailark.snailhrm.BizException;
 import com.snailark.snailhrm.ExceptionCategory;
 import com.snailark.snailhrm.SystemException;
 import com.snailark.snailhrm.model.DepartmentVO;
@@ -28,9 +27,6 @@ public abstract class DataAccessObject {
 		SessionFactory factory = HibernateUtils.getFactoryObject();
 		Session session = factory.getCurrentSession();
 		session.save(parentVO);
-		
-		
-		
 	}
 
 	public void update(ValueObject parentVO) throws SystemException {
@@ -40,7 +36,6 @@ public abstract class DataAccessObject {
 		Session session = factory.getCurrentSession();
 		session.update(parentVO);
 		} catch(HibernateException he) {
-			he.printStackTrace();
 			throw new SystemException(ExceptionCategory.DATABASE_UPDATE_EXCEPTION);
 		}
 	}
@@ -49,22 +44,18 @@ public abstract class DataAccessObject {
 		// Fetch a record by id
 		SessionFactory factory = HibernateUtils.getFactoryObject();
 		Session session = factory.getCurrentSession();
-		Criteria criteria = session.createCriteria(DepartmentVO.class);
+		Criteria criteria = session.createCriteria(classReference);
 		Criterion criterion = Restrictions.idEq(requestVO.getId());
 		criteria.add(criterion);
-		List<DepartmentVO> departmentsList =criteria.list();
-		if(!departmentsList.isEmpty() && departmentsList.size() == 1){
-			DepartmentVO departmentVO = new DepartmentVO();
-			departmentVO = departmentsList.get(0);
-			return departmentVO;
+		List<ValueObject> list =criteria.list();
+		if(!list.isEmpty() && list.size() == 1){
+			ValueObject valueObject;
+			valueObject = list.get(0);
+			return valueObject;
 		}
 		else{
-			
 			return null;
 		}
-		
-	
-		
 	}
 
 	public void delete(ValueObject parentVO) {

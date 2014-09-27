@@ -52,17 +52,18 @@ public class ConfigurationService {
 		Session session = HibernateUtils.getFactoryObject().getCurrentSession();
 		Transaction transaction = session.beginTransaction();
 		ConfigurationFacade configurationFacade = new ConfigurationFacade();
-		DepartmentVO departmentVO2 =  configurationFacade.findDepartmentById(departmentVO);
+		DepartmentVO departmentVO2 = configurationFacade
+				.findDepartmentById(departmentVO);
 		transaction.commit();
 		return departmentVO2;
 	}
-	
+
 	public void addRole(RoleVO roleVO) throws BizException {
 		Session session = HibernateUtils.getFactoryObject().getCurrentSession();
 		Transaction transaction = session.beginTransaction();
 		ConfigurationFacade configurationFacade = new ConfigurationFacade();
+		
 		try {
-
 			configurationFacade.addRole(roleVO);
 			transaction.commit();
 		} catch (BizException be) {
@@ -71,4 +72,21 @@ public class ConfigurationService {
 		}
 	}
 
+	public void updateRole(RoleVO roleVO) throws SystemException, BizException {
+		Session session = HibernateUtils.getFactoryObject().getCurrentSession();
+		Transaction transaction = session.beginTransaction();
+		ConfigurationFacade configurationFacade = new ConfigurationFacade();
+		configurationFacade.updateRole(roleVO);
+		transaction.commit();
+	}
+	
+	public RoleVO findRoleById(RoleVO roleVO) {
+		Session session = HibernateUtils.getFactoryObject().getCurrentSession();
+		Transaction transaction = session.beginTransaction();
+		ConfigurationFacade configurationFacade = new ConfigurationFacade();
+		RoleVO roleVO2 = configurationFacade
+				.findRoleById(roleVO);
+		transaction.commit();
+		return roleVO2;
+	}
 }
