@@ -7,7 +7,6 @@ import org.hibernate.Session;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Restrictions;
 
-import com.snailark.snailhrm.model.DepartmentVO;
 import com.snailark.snailhrm.model.RoleVO;
 import com.snailark.snailhrm.util.HibernateUtils;
 
@@ -26,6 +25,7 @@ public class RoleDAO extends DataAccessObject {
 	    criteria.add(criterion);
 	    List<RoleVO> roleVOList = criteria.list();
 	    if(!roleVOList.isEmpty()){
+	    	System.out.println("true ");
 	    	savedVO = roleVOList.get(0);
 	    }
 	    return savedVO;

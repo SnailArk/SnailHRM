@@ -1,49 +1,50 @@
 package com.snailark.snailhrm.web.action;
 
-import java.util.Calendar;
-import java.util.Date;
-
 import org.apache.commons.lang.StringUtils;
 
 import com.snailark.snailhrm.BizException;
+import com.snailark.snailhrm.SystemException;
 import com.snailark.snailhrm.model.RoleVO;
 import com.snailark.snailhrm.service.ConfigurationService;
 
-public class AddRoleAction extends BaseActionSupport {
-	
-	private int id;
+public class UpdateRoleAction extends BaseActionSupport {
 	private RoleVO roleVO;
+	private int id;
 	
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
 	public RoleVO getRoleVO() {
 		return roleVO;
 	}
 	public void setRoleVO(RoleVO roleVO) {
 		this.roleVO = roleVO;
 	}
-	
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	@Override
 	public String execute() {
+		ConfigurationService configurationService = new ConfigurationService();
 		if (SUBMIT.equals(getSubmit())) {
-			Calendar calendar = Calendar.getInstance();
-			Date createdDate = calendar.getTime();
-			roleVO.setCreatedDate(createdDate);
-			
-			ConfigurationService configurationService = new ConfigurationService();
 			try {
-				configurationService.addRole(roleVO);
-				this.setId(roleVO.getId());
-				return SUCCESS;
-			} catch (BizException se) {
-				addActionError(se.getExceptionCategory().getMessage());
+				configurationService.updateRole(roleVO);
+			} catch (SystemException e) {
+				addActionError("Error while saving the role.");
+				return ERROR;
+			} catch (BizException e) {
+				addActionError("Role name already exist");
 				return ERROR;
 			}
+			return SUCCESS;
+		} else {
+			RoleVO roleVO = new RoleVO();
+			roleVO.setId(getId());
+			roleVO = configurationService.findRoleById(roleVO);
+			setRoleVO(roleVO);
+			return "update";
 		}
-		return "addRole";
 	}
 	
 	@Override

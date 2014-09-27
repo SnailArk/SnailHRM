@@ -46,7 +46,6 @@ public class ConfigurationFacade {
 	}
 	
 	public DepartmentVO findDepartmentById(DepartmentVO departmentVO){
-		
 		   DepartmentDAO departmentDAO = new DepartmentDAO();
 		   return (DepartmentVO)departmentDAO.findById(departmentVO);
 	}
@@ -59,6 +58,26 @@ public class ConfigurationFacade {
 		else {
 			throw new BizException(ExceptionCategory.ROLE_ALREADY_EXISTS);
 		}
+	}
+
+	public void updateRole(RoleVO roleVO) throws SystemException, BizException {
+		RoleDAO roleDAO = new RoleDAO();
+		RoleVO savedVO = roleDAO.searchByRoleName(roleVO);
+		
+		if(savedVO == null){
+			roleDAO.update(roleVO);
+		} else if(savedVO.getId() == roleVO.getId()) {
+			savedVO.setRoleName(roleVO.getRoleName());
+			savedVO.setRoleDescription(roleVO.getRoleDescription());
+			roleDAO.update(savedVO);
+		} else {
+			throw new BizException(ExceptionCategory.ROLE_ALREADY_EXISTS);
+		}
+	}
+
+	public RoleVO findRoleById(RoleVO roleVO) {
+		RoleDAO roleDAO = new RoleDAO();
+		return (RoleVO) roleDAO.findById(roleVO);
 	}
 	
 	public List<RoleVO> searchRole() {

@@ -35,16 +35,12 @@ public class UpdateDepartmentAction extends BaseActionSupport {
 	public String execute() {
 		ConfigurationService configurationService = new ConfigurationService();
 		if (SUBMIT.equals(getSubmit())) {
-
 			try {
-
 				configurationService.updateDepartment(departmentVO);
-
 			} catch (SystemException e) {
 				addActionError("Error while saving the department.");
 				return ERROR;
 			} catch (BizException e) {
-				// TODO: handle exception
 				addActionError("Department name already exist");
 				return ERROR;
 			}
@@ -55,12 +51,8 @@ public class UpdateDepartmentAction extends BaseActionSupport {
 			departmentVO = configurationService
 					.findDepartmentById(departmentVO);
 			setDepartmentVO(departmentVO);
-			// for debug purpose
-			System.out.println("id " + departmentVO.getId());
-			System.out.println("name " + departmentVO.getDepartmentName());
 			return "update";
 		}
-
 	}
 
 	@Override
