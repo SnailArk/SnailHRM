@@ -11,6 +11,9 @@
 		<fileset dir="${web.dir}/WEB-INF/lib">
 			<include name="*.jar"/>
 		</fileset>
+		<fileset dir="${src.dir}">
+		  <include name="*.xml"/>
+		</fileset>		
 		<pathelement path="${build.dir}"/>
 	</path>
 
@@ -57,7 +60,7 @@
 	<target name="deploywar" depends="build" 
       description="Deploy application as a WAR file">
 		<war destfile="${name}.war"
-             webxml="${web.dir}/WEB-INF/web.xml">
+             webxml="${web.dir}/WEB-INF/web.xml">	
 			<fileset dir="${web.dir}">
 				<include name="**/*.*"/>
 			</fileset>
