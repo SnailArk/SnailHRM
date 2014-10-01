@@ -35,7 +35,8 @@
 				<s:iterator value='listRole' status="rowstatus">
 					<tr align="center"	class="<s:if test="#rowstatus.odd == true ">odd</s:if><s:else>even</s:else>">
 						<td width="40%"><a
-							href="updateRole?id=<s:property value="id"/>"><s:property value='roleName' /></a></td>
+							href="updateRole?id=<s:property value="id"/>">
+						<s:property value='roleName' /></a></td>
 						<td width="40%"><s:property value='roleDescription' /></td>
 						<td width="20%"><s:property value='createdDate' /></td>
 						</tr>

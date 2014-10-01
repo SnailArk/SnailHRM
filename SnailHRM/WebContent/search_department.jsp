@@ -25,18 +25,19 @@
 				</div>
 			</div>
 			<span style="padding: 1px;"></span>
-			<table class="" align="center"
-				style="width: 100%; overflow: hidden;">
+			<table class="" align="center" style="width: 100%; overflow: hidden;">
 				<tr>
 					<th width="40%">Department Name</th>
 					<th width="40%">Notes</th>
 				</tr>
 				<s:iterator value='listDepartment' status="rowstatus">
-					<tr align="center"	class="<s:if test="#rowstatus.odd == true ">odd</s:if><s:else>even</s:else>">
+					<tr align="center"
+						class="<s:if test="#rowstatus.odd == true ">odd</s:if><s:else>even</s:else>">
 						<td width="40%"><a
-							href="updateDepartment?id=<s:property value="id"/>"><s:property value='departmentName' /></a></td>
+							href="updateDepartment?id=<s:property value="id"/>"><s:property
+									value='departmentName' /></a></td>
 						<td width="40%"><s:property value='notes' /></td>
-						</tr>
+					</tr>
 				</s:iterator>
 			</table>
 		</center>
