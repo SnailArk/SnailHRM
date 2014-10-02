@@ -58,6 +58,10 @@ public class AddDepartmentAction extends BaseActionSupport {
 					addFieldError("departmentVO.departmentName", "Department name cannot contain numeric and special characters");
 				}
 			}
+			
+			if(StringUtils.length(departmentVO.getNotes()) > 1000) {
+				addFieldError("departmentVO.notes", "Notes cannot be exceed 1000 characters");
+			}
 		}
 
 	}
