@@ -54,6 +54,9 @@
 			<fileset dir="${web.dir}">
 				<include name="**/*.*"/>
 			</fileset>
+			<fileset dir="${src.dir}">
+					  <include name="*.xml"/>
+			</fileset>
 		</copy>
 	</target>
 
@@ -63,6 +66,9 @@
              webxml="${web.dir}/WEB-INF/web.xml">	
 			<fileset dir="${web.dir}">
 				<include name="**/*.*"/>
+			</fileset>
+			<fileset dir="${src.dir}">
+					  <include name="*.xml"/>
 			</fileset>
 		</war>
 		<echo>${deploy.path}</echo>
