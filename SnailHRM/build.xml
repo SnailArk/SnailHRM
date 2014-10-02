@@ -1,80 +1,72 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="SnailHRM" basedir="." default="usage">
 
-	<property file="build.properties"/>
-	<property name="src.dir" value="src"/>
-	<property name="web.dir" value="WebContent"/>
-	<property name="build.dir" value="${web.dir}/WEB-INF/classes"/>
-	<property name="name" value="SnailHRM"/>
+	<property file="build.properties" />
+	<property name="src.dir" value="src" />
+	<property name="web.dir" value="WebContent" />
+	<property name="build.dir" value="${web.dir}/WEB-INF/classes" />
+	<property name="name" value="SnailHRM" />
 
 	<path id="master-classpath">
 		<fileset dir="${web.dir}/WEB-INF/lib">
-			<include name="*.jar"/>
+			<include name="*.jar" />
 		</fileset>
 		<fileset dir="${src.dir}">
-		  <include name="*.xml"/>
-		</fileset>		
-		<pathelement path="${build.dir}"/>
+			<include name="*.xml" />
+		</fileset>
+		<pathelement path="${build.dir}" />
 	</path>
 
 	<target name="usage">
-		<echo message=""/>
-		<echo message="${name} build file"/>
-		<echo message="-----------------------------------"/>
-		<echo message=""/>
-		<echo message="Available targets are:"/>
-		<echo message=""/>
-		<echo message="deploy    --> Deploy application as directory"/>
-		<echo message="deploywar --> Deploy application as a WAR file"/>
-		<echo message=""/>
+		<echo message="" />
+		<echo message="${name} build file" />
+		<echo message="-----------------------------------" />
+		<echo message="" />
+		<echo message="Available targets are:" />
+		<echo message="" />
+		<echo message="deploy    --> Deploy application as directory" />
+		<echo message="deploywar --> Deploy application as a WAR file" />
+		<echo message="" />
 	</target>
 
 	<target name="build" description="Compile main source tree java files">
-		<echo message=""/>
-		<echo message="Compiling source"/>
-		<echo message=""/>
-		<mkdir dir="${build.dir}"/>
-		<javac destdir="${build.dir}" source="1.7" 
-          target="1.7" debug="true"
-          deprecation="false" optimize="false" failonerror="true">
-			<src path="${src.dir}"/>
-			<classpath refid="master-classpath"/>
+		<echo message="" />
+		<echo message="Compiling source" />
+		<echo message="" />
+		<mkdir dir="${build.dir}" />
+		<copy todir="${build.dir}">
+			<fileset dir="${src.dir}">
+				<include name="**/*.xml" />
+			</fileset>
+		</copy>
+		<javac destdir="${build.dir}" source="1.7" target="1.7" debug="true" deprecation="false" optimize="false" failonerror="true">
+			<src path="${src.dir}" />
+			<classpath refid="master-classpath" />
 		</javac>
 	</target>
 
-	<target name="clean_build" depends="clean, build" 
-	      description="Deploy application">
-		<echo message="Clean Build"/>
+	<target name="clean_build" depends="clean, build" description="Deploy application">
+		<echo message="Clean Build" />
 	</target>
-		
-	<target name="deploy" depends="build" 
-      description="Deploy application">
-		<copy todir="${deploy.path}/${name}" 
-          preservelastmodified="true">
+
+	<target name="deploy" depends="build" description="Deploy application">
+		<copy todir="${deploy.path}/${name}" preservelastmodified="true">
 			<fileset dir="${web.dir}">
-				<include name="**/*.*"/>
-			</fileset>
-			<fileset dir="${src.dir}">
-					  <include name="*.xml"/>
+				<include name="**/*.*" />
 			</fileset>
 		</copy>
 	</target>
 
-	<target name="deploywar" depends="build" 
-      description="Deploy application as a WAR file">
-		<war destfile="${name}.war"
-             webxml="${web.dir}/WEB-INF/web.xml">	
+	<target name="deploywar" depends="build" description="Deploy application as a WAR file">
+		<war destfile="${name}.war" webxml="${web.dir}/WEB-INF/web.xml">
 			<fileset dir="${web.dir}">
-				<include name="**/*.*"/>
-			</fileset>
-			<fileset dir="${src.dir}">
-					  <include name="*.xml"/>
+				<include name="**/*.*" />
 			</fileset>
 		</war>
 		<echo>${deploy.path}</echo>
 		<copy todir="${deploy.path}" preservelastmodified="true">
 			<fileset dir=".">
-				<include name="*.war"/>
+				<include name="*.war" />
 			</fileset>
 		</copy>
 	</target>
@@ -83,7 +75,7 @@
 	<target name="clean" description="Clean output directories">
 		<delete>
 			<fileset dir="${build.dir}">
-				<include name="**/*.class"/>
+				<include name="**/*.class" />
 			</fileset>
 		</delete>
 	</target>
