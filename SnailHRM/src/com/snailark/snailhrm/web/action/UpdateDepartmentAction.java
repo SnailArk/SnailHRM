@@ -2,6 +2,7 @@ package com.snailark.snailhrm.web.action;
 
 
 import org.apache.commons.lang.StringUtils;
+import org.hibernate.HibernateException;
 
 import com.snailark.snailhrm.BizException;
 import com.snailark.snailhrm.SystemException;
@@ -42,6 +43,9 @@ public class UpdateDepartmentAction extends BaseActionSupport {
 				return ERROR;
 			} catch (BizException e) {
 				addActionError("Department name already exist");
+				return ERROR;
+			} catch(HibernateException he) {
+				he.printStackTrace();
 				return ERROR;
 			}
 			return SUCCESS;

@@ -28,6 +28,7 @@
 			class="com.snailark.snailhrm.web.action.SearchDepartmentAction"
 			method="execute">
 			<result name="success">search_department.jsp</result>
+			<result name="error">search_department.jsp</result>
 		</action>
 		
 		<action name="addRole" class="com.snailark.snailhrm.web.action.AddRoleAction"
@@ -53,6 +54,6 @@
 			class="com.snailark.snailhrm.web.action.SearchRoleAction"
 			method="execute">
 			<result name="success">search_role.jsp</result>
-		</action>		
+		</action>
 	</package>
 </struts>

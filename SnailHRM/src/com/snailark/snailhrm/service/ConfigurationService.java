@@ -1,7 +1,10 @@
 package com.snailark.snailhrm.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.HibernateError;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -14,7 +17,7 @@ import com.snailark.snailhrm.util.HibernateUtils;
 
 public class ConfigurationService {
 
-	public void addDepartment(DepartmentVO departmentVO) throws BizException {
+	public void addDepartment(DepartmentVO departmentVO) throws BizException, HibernateException {
 		Session session = HibernateUtils.getFactoryObject().getCurrentSession();
 		Transaction transaction = session.beginTransaction();
 		ConfigurationFacade configurationFacade = new ConfigurationFacade();
@@ -22,30 +25,51 @@ public class ConfigurationService {
 
 			configurationFacade.addDepartment(departmentVO);
 			transaction.commit();
-		} catch (BizException be) {
+		} catch (BizException be ) {
 			transaction.rollback();
 			throw be;
+		} catch(HibernateException he) {
+			he.printStackTrace();
+			transaction.rollback();
+			throw he;
 		}
 	}
 
-	public List<DepartmentVO> searchDepartment() {
+	public List<DepartmentVO> searchDepartment() throws HibernateException{
 		Session session = HibernateUtils.getFactoryObject().getCurrentSession();
-		Transaction transaction = session.beginTransaction();
 		ConfigurationFacade configurationFacade = new ConfigurationFacade();
-		List<DepartmentVO> deaprtmentsList = configurationFacade
-				.searchDepartment();
-		transaction.commit();
-		return deaprtmentsList;
+		List<DepartmentVO> departmentsList = new ArrayList<DepartmentVO>();
+		try {
+			departmentsList.addAll(configurationFacade
+				.searchDepartment());
+		} catch(HibernateException he) {
+			he.printStackTrace();
+			throw he;
+		}
+		return departmentsList;
 
 	}
 
 	public void updateDepartment(DepartmentVO departmentVO)
-			throws SystemException, BizException {
+			throws SystemException, BizException, HibernateException {
 		Session session = HibernateUtils.getFactoryObject().getCurrentSession();
 		Transaction transaction = session.beginTransaction();
 		ConfigurationFacade configurationFacade = new ConfigurationFacade();
-		configurationFacade.updateDepartment(departmentVO);
-		transaction.commit();
+		try {
+			
+			configurationFacade.updateDepartment(departmentVO);
+			transaction.commit();
+		} catch(SystemException se) {
+			transaction.rollback();
+			throw se;
+		} catch(BizException be) {
+			transaction.rollback();
+			throw be;
+		} catch(HibernateException he) {
+			he.printStackTrace();
+			transaction.rollback();
+			throw he;
+		}
 	}
 
 	public DepartmentVO findDepartmentById(DepartmentVO departmentVO) {
