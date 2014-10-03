@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <!DOCTYPE hibernate-mapping PUBLIC   "-//Hibernate/Hibernate Mapping DTD//EN"  "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.snailark.snailhrm.model">
+	<class name="EmployeePersonalDetailsVO" table="EMPLOYEE_PERSONAL_DETAILS">
+		<meta attribute="class-description">
+			This class contains the employee detail.
+		</meta>
+		<id name="id" type="int" column="ID">
+			<generator class="increment" />
+		</id>
+		<property name="firstName" column="FIRST_NAME"></property>
+		<property name="middleName" column="MIDDLE_NAME"></property>
+		<property name="lastName" column="LAST_NAME"></property>
+		<property name="dateOfBirth" column="DATE_OF_BIRTH"></property>
+		<property name="nationality" column="NATIONALITY"></property>
+		<property name="gender" column="GENDER"></property>
+		<property name="phoneNumber" column="PHONE_NUMBER"></property>
+		<property name="email" column="EMAIL"></property>
+		<property name="status" column="STATUS" ></property>
+		
+		<set name="addresses" inverse="true" lazy="false" cascade="all">
+            <key>
+                <column name="EMPLOYEE_ID" precision="18" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="EmployeeAddressDetailsVO"/>
+        </set>
+		
+		<set name="jobDetails" inverse="true" lazy="false" cascade="all">
+            <key>
+                <column name="EMPLOYEE_ID" precision="18" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="EmployeeJobDetailsVO"/>
+        </set>
+	</class>
+</hibernate-mapping> 

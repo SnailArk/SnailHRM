@@ -25,6 +25,9 @@
 		<!-- Mapping files -->
 		<mapping resource="com/snailark/snailhrm/model/department.hbm.xml" />
 		<mapping resource="com/snailark/snailhrm/model/role.hbm.xml" />
+		<mapping resource="com/snailark/snailhrm/model/employee_personal_details.hbm.xml" />
+		<mapping resource="com/snailark/snailhrm/model/employee_job_details.hbm.xml" />
+		<mapping resource="com/snailark/snailhrm/model/employee_address_details.hbm.xml" />
 	</session-factory>
 
 </hibernate-configuration>

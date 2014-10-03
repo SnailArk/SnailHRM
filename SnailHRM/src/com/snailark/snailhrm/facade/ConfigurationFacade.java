@@ -46,8 +46,8 @@ public class ConfigurationFacade {
 	}
 	
 	public DepartmentVO findDepartmentById(DepartmentVO departmentVO){
-		   DepartmentDAO departmentDAO = new DepartmentDAO();
-		   return (DepartmentVO)departmentDAO.findById(departmentVO);
+		DepartmentDAO departmentDAO = new DepartmentDAO();
+		return (DepartmentVO)departmentDAO.findById(departmentVO);
 	}
 	
 	public void addRole(RoleVO roleVO) throws BizException {

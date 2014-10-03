@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.snailark.snailhrm.model">
+	<class name="EmployeeJobDetailsVO" table="EMPLOYEE_JOB_DETAILS">
+		<meta attribute="class-description">
+			This class contains the job detail.
+		</meta>
+		<id name="id" type="int" column="ID">
+			<generator class="increment" />
+		</id>
+		<many-to-one name="employee" class="com.snailark.snailhrm.model.EmployeePersonalDetailsVO" fetch="select">
+			<column name="EMPLOYEE_ID" precision="18" scale="0" not-null="true"
+				unique="true" />
+		</many-to-one>
+		<property name="department" column="DEPARTMENT" />
+		<property name="role" column="ROLE" />
+		<property name="dateOfJoining" column="DATE_OF_JOINING" />
+	</class>
+</hibernate-mapping>
