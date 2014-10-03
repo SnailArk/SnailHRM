@@ -1,7 +1,7 @@
 package com.snailark.snailhrm.web.action;
 
 import org.apache.commons.lang.StringUtils;
-
+import org.hibernate.HibernateException;
 
 import com.snailark.snailhrm.BizException;
 import com.snailark.snailhrm.model.DepartmentVO;
@@ -42,6 +42,9 @@ public class AddDepartmentAction extends BaseActionSupport {
 			} catch (BizException se) {
 				addActionError(se.getExceptionCategory().getMessage());
 				return ERROR;
+			} catch(HibernateException he) {
+				he.printStackTrace();
+				return ERROR;
 			}
 		}
 		return "addDepartment";
@@ -52,11 +55,18 @@ public class AddDepartmentAction extends BaseActionSupport {
 		super.validate();
 		if (SUBMIT.equals(getSubmit())) {
 			if (StringUtils.isEmpty(departmentVO.getDepartmentName())) {
-				addFieldError("departmentVO.departmentName", "Department name cannot be blank.");
+				addFieldError("departmentVO.departmentName",
+						"Department name cannot be blank.");
 			} else {
 				if (!StringUtils.isAlphaSpace(departmentVO.getDepartmentName())) {
-					addFieldError("departmentVO.departmentName", "Department name cannot contain numeric and special characters");
+					addFieldError("departmentVO.departmentName",
+							"Department name cannot contain numeric and special characters");
 				}
+			}
+
+			if (StringUtils.length(departmentVO.getNotes()) > 1000) {
+				addFieldError("departmentVO.notes",
+						"Notes cannot be exceed 1000 characters");
 			}
 		}
 

@@ -2,6 +2,8 @@ package com.snailark.snailhrm.web.action;
 
 import java.util.List;
 
+import org.hibernate.HibernateException;
+
 import com.snailark.snailhrm.model.DepartmentVO;
 import com.snailark.snailhrm.service.ConfigurationService;
 
@@ -28,8 +30,14 @@ public class SearchDepartmentAction extends BaseActionSupport {
 	
 	public String execute() {
 		ConfigurationService configurationService = new ConfigurationService();
-		listDepartment =  configurationService.searchDepartment();
-		return SUCCESS;
+		try {
+			
+			listDepartment =  configurationService.searchDepartment();
+			return SUCCESS;
+		} catch(HibernateException he) {
+			he.printStackTrace();
+			return ERROR;
+		}
 	}
 	
 }

@@ -2,6 +2,7 @@ package com.snailark.snailhrm.service;
 
 import java.util.List;
 
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -14,20 +15,20 @@ import com.snailark.snailhrm.util.HibernateUtils;
 
 public class ConfigurationService {
 
-	public void addDepartment(DepartmentVO departmentVO) throws BizException {
+	public void addDepartment(DepartmentVO departmentVO) throws BizException, HibernateException {
 		Session session = HibernateUtils.getFactoryObject().getCurrentSession();
 		Transaction transaction = session.beginTransaction();
 		ConfigurationFacade configurationFacade = new ConfigurationFacade();
 		try {
 			configurationFacade.addDepartment(departmentVO);
 			transaction.commit();
-		} catch (BizException be) {
+		} catch (BizException be ) {
 			transaction.rollback();
 			throw be;
 		}
 	}
 
-	public List<DepartmentVO> searchDepartment() {
+	public List<DepartmentVO> searchDepartment() throws HibernateException{
 		Session session = HibernateUtils.getFactoryObject().getCurrentSession();
 		Transaction transaction = session.beginTransaction();
 		ConfigurationFacade configurationFacade = new ConfigurationFacade();
@@ -39,7 +40,7 @@ public class ConfigurationService {
 	}
 
 	public void updateDepartment(DepartmentVO departmentVO)
-			throws SystemException, BizException {
+			throws SystemException, BizException, HibernateException {
 		Session session = HibernateUtils.getFactoryObject().getCurrentSession();
 		Transaction transaction = session.beginTransaction();
 		try {

@@ -24,7 +24,7 @@
 			<!--  Add department form -->
 			<s:form action="addDepartment">
 				<s:textfield name="departmentVO.departmentName"
-					label="Department Name" />
+					label="Department Name" maxlength="45" />
 				<s:textarea name="departmentVO.notes" label="Notes " rows="10" />
 				<s:submit name="submit" value="submit" />
 			</s:form>
