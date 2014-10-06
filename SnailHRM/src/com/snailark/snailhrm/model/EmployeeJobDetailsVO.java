@@ -3,27 +3,27 @@ package com.snailark.snailhrm.model;
 import java.util.Date;
 
 public class EmployeeJobDetailsVO extends ValueObject {
-	private EmployeePersonalDetailsVO employee;
-	private String department;
-	private String role;
+	private EmployeeVO employee;
+	private DepartmentVO department;
+	private RoleVO role;
 	private Date dateOfJoining;
 
-	public EmployeePersonalDetailsVO getEmployee() {
+	public EmployeeVO getEmployee() {
 		return employee;
 	}
-	public void setEmployee(EmployeePersonalDetailsVO employee) {
+	public void setEmployee(EmployeeVO employee) {
 		this.employee = employee;
 	}
-	public String getDepartment() {
+	public DepartmentVO getDepartment() {
 		return department;
 	}
-	public void setDepartment(String department) {
+	public void setDepartment(DepartmentVO department) {
 		this.department = department;
 	}
-	public String getRole() {
+	public RoleVO getRole() {
 		return role;
 	}
-	public void setRole(String role) {
+	public void setRole(RoleVO role) {
 		this.role = role;
 	}
 	public Date getDateOfJoining() {

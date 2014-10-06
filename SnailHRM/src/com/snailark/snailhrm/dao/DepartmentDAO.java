@@ -20,7 +20,6 @@ public class DepartmentDAO extends DataAccessObject {
 
 	
 	public List<DepartmentVO> searchDepartment() {
-		
 		Session session = HibernateUtils.getFactoryObject().getCurrentSession();
 		Criteria criteria = session.createCriteria(DepartmentVO.class);
 		List<DepartmentVO> departmentsList = criteria.list();

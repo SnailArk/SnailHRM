@@ -55,5 +55,16 @@
 			method="execute">
 			<result name="success">search_role.jsp</result>
 		</action>
+		
+		<action name="addEmployee"
+			class="com.snailark.snailhrm.web.action.AddEmployeeAction" method="execute">
+			<result name="success" type="redirectAction">
+				<param name="id">${id}</param>
+				<param name="actionName">updateEmployee</param>
+			</result>
+			<result name="error">/add_employee.jsp</result>
+			<result name="input">/add_employee.jsp</result>
+			<result name="addEmployee">/add_employee.jsp</result>
+		</action>
 	</package>
 </struts>

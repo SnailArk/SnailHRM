@@ -5,7 +5,8 @@ public enum ExceptionCategory {
 	BIZ("Bisuness Exception"), 
 	DATABASE_UPDATE_EXCEPTION("Error while updating the record in database."),
 	DEPARTMENT_ALREADY_EXISTS("Department name already exists"),
-	ROLE_ALREADY_EXISTS("Role name already exists");
+	ROLE_ALREADY_EXISTS("Role name already exists"),
+	EMPLOYEE_ALREADY_EXISTS("Employee already exists");
 
 	private String message;
 

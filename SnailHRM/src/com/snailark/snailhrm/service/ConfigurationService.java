@@ -10,6 +10,7 @@ import com.snailark.snailhrm.BizException;
 import com.snailark.snailhrm.SystemException;
 import com.snailark.snailhrm.facade.ConfigurationFacade;
 import com.snailark.snailhrm.model.DepartmentVO;
+import com.snailark.snailhrm.model.EmployeeVO;
 import com.snailark.snailhrm.model.RoleVO;
 import com.snailark.snailhrm.util.HibernateUtils;
 
@@ -80,7 +81,7 @@ public class ConfigurationService {
 		}
 	}
 	
-	public List<RoleVO> searchList() {
+	public List<RoleVO> searchRole() {
 		Session session = HibernateUtils.getFactoryObject().getCurrentSession();
 		Transaction transaction = session.beginTransaction();
 		ConfigurationFacade configurationFacade = new ConfigurationFacade();
@@ -114,5 +115,18 @@ public class ConfigurationService {
 				.findRoleById(roleVO);
 		transaction.commit();
 		return roleVO2;
+	}
+
+	public void addEmployee(EmployeeVO employeeVO) throws BizException {
+		Session session = HibernateUtils.getFactoryObject().getCurrentSession();
+		Transaction transaction = session.beginTransaction();
+		ConfigurationFacade configurationFacade = new ConfigurationFacade();
+		try {
+			configurationFacade.addEmployee(employeeVO);
+			transaction.commit();
+		} catch (BizException be ) {
+			transaction.rollback();
+			throw be;
+		}
 	}
 }

@@ -28,6 +28,16 @@
 									Role</span></a>
 					</ul>
 				</div></li>
+				
+				<li><a href="#" class="parent"><span>Employee</span></a>
+				<div>
+					<ul>
+						<li><a href="addEmployee" class="parent"><span>Add
+									Employee</span></a>
+						<li><a href="searchEmployee" class="parent"><span>Search
+									Employee</span></a>
+					</ul>
+				</div></li>
 		</ul>
 	</div>
 </div>

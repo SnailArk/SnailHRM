@@ -2,14 +2,14 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping package="com.snailark.snailhrm.model">
-	<class name="EmployeeAddressDetailsVO" table="EMPLOYEE_ADDRESS_DETAILS">
+	<class name="AddressVO" table="ADDRESS">
 		<meta attribute="class-description">
 			This class contains the address detail.
 		</meta>
 		<id name="id" type="int" column="ID">
 			<generator class="increment" />
 		</id>
-		<many-to-one name="employee" class="com.snailark.snailhrm.model.EmployeePersonalDetailsVO" fetch="select">
+		<many-to-one name="employee" class="com.snailark.snailhrm.model.EmployeeVO" fetch="select">
 			<column name="EMPLOYEE_ID" precision="18" scale="0" not-null="true"
 				unique="true" />
 		</many-to-one>
@@ -17,5 +17,6 @@
 		<property name="country" column="COUNTRY" />
 		<property name="state" column="STATE" />
 		<property name="city" column="CITY" />
+		<property name="addressType" column="ADDRESS_TYPE" />
 	</class>
 </hibernate-mapping>

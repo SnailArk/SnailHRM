@@ -2,7 +2,7 @@
  <!DOCTYPE hibernate-mapping PUBLIC   "-//Hibernate/Hibernate Mapping DTD//EN"  "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping package="com.snailark.snailhrm.model">
-	<class name="EmployeePersonalDetailsVO" table="EMPLOYEE_PERSONAL_DETAILS">
+	<class name="EmployeeVO" table="EMPLOYEE">
 		<meta attribute="class-description">
 			This class contains the employee detail.
 		</meta>
@@ -23,7 +23,7 @@
             <key>
                 <column name="EMPLOYEE_ID" precision="18" scale="0" not-null="true" />
             </key>
-            <one-to-many class="EmployeeAddressDetailsVO"/>
+            <one-to-many class="AddressVO"/>
         </set>
 		
 		<set name="jobDetails" inverse="true" lazy="false" cascade="all">

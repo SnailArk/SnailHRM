@@ -3,7 +3,7 @@ package com.snailark.snailhrm.model;
 import java.util.Date;
 import java.util.Set;
 
-public class EmployeePersonalDetailsVO extends ValueObject {
+public class EmployeeVO extends ValueObject {
 	private String firstName;
 	private String middleName;
 	private String lastName;
@@ -13,7 +13,7 @@ public class EmployeePersonalDetailsVO extends ValueObject {
 	private String phoneNumber;
 	private String email;
 	private boolean status;
-	private Set<EmployeeAddressDetailsVO> addresses;
+	private Set<AddressVO> addresses;
 	private Set<EmployeeJobDetailsVO> jobDetails;
 	
 	public String getFirstName() {
@@ -88,11 +88,11 @@ public class EmployeePersonalDetailsVO extends ValueObject {
 		this.status = status;
 	}
 
-	public Set<EmployeeAddressDetailsVO> getAddresses() {
+	public Set<AddressVO> getAddresses() {
 		return addresses;
 	}
 
-	public void setAddresses(Set<EmployeeAddressDetailsVO> addresses) {
+	public void setAddresses(Set<AddressVO> addresses) {
 		this.addresses = addresses;
 	}
 

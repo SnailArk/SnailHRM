@@ -1,16 +1,17 @@
 package com.snailark.snailhrm.model;
 
-public class EmployeeAddressDetailsVO extends ValueObject {
-	private EmployeePersonalDetailsVO employee;
+public class AddressVO extends ValueObject {
+	private EmployeeVO employee;
 	private String street;
 	private String country;
 	private String state;
 	private String city;
+	private String addressType;
 	
-	public EmployeePersonalDetailsVO getEmployee() {
+	public EmployeeVO getEmployee() {
 		return employee;
 	}
-	public void setEmployee(EmployeePersonalDetailsVO employee) {
+	public void setEmployee(EmployeeVO employee) {
 		this.employee = employee;
 	}
 	public String getStreet() {
@@ -36,5 +37,11 @@ public class EmployeeAddressDetailsVO extends ValueObject {
 	}
 	public void setCity(String city) {
 		this.city = city;
+	}
+	public String getAddressType() {
+		return addressType;
+	}
+	public void setAddressType(String addressType) {
+		this.addressType = addressType;
 	}
 }

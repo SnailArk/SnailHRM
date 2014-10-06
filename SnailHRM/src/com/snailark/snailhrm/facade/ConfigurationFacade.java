@@ -7,8 +7,12 @@ import com.snailark.snailhrm.BizException;
 import com.snailark.snailhrm.ExceptionCategory;
 import com.snailark.snailhrm.SystemException;
 import com.snailark.snailhrm.dao.DepartmentDAO;
+import com.snailark.snailhrm.dao.EmployeeDAO;
 import com.snailark.snailhrm.dao.RoleDAO;
+import com.snailark.snailhrm.model.AddressVO;
 import com.snailark.snailhrm.model.DepartmentVO;
+import com.snailark.snailhrm.model.EmployeeJobDetailsVO;
+import com.snailark.snailhrm.model.EmployeeVO;
 import com.snailark.snailhrm.model.RoleVO;
 
 public class ConfigurationFacade {
@@ -84,6 +88,22 @@ public class ConfigurationFacade {
 		RoleDAO roleDAO = new RoleDAO();
 		List<RoleVO> searchedRoleName = roleDAO.searchRole();
 		return searchedRoleName;
+	}
+
+	public void addEmployee(EmployeeVO employeeVO) throws BizException {
+		EmployeeDAO employeeDAO = new EmployeeDAO();
+		if (employeeDAO.searchByEmailId(employeeVO) == null) {
+			for(AddressVO addVo : employeeVO.getAddresses()) {
+				addVo.setEmployee(employeeVO);			
+			}
+			for(EmployeeJobDetailsVO jobVO : employeeVO.getJobDetails()) {
+				jobVO.setEmployee(employeeVO);
+			}
+			employeeDAO.save(employeeVO);
+		}
+		else {
+			throw new BizException(ExceptionCategory.EMPLOYEE_ALREADY_EXISTS);
+		}
 	}
 	
 }

@@ -1,36 +1,39 @@
-create table EMPLOYEE_PERSONAL_DETAILS (
-  ID integer unsigned not null auto_increment,
-  FIRST_NAME varchar(45) not null,
-  MIDDLE_NAME varchar(45),
-  LAST_NAME varchar(45) not null,
-  DATE_OF_BIRTH date not null,
-  NATIONALITY varchar(45) not null,
-  GENDER varchar(45) not null,
-  PHONE_NUMBER varchar(13) not null,
-  EMAIL varchar(45) not null,
-  STATUS boolean not null,
-  primary key (ID)
+CREATE TABLE `address` (
+  `ID` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `EMPLOYEE_ID` int(10) unsigned NOT NULL,
+  `STREET` varchar(45) NOT NULL,
+  `COUNTRY` varchar(45) NOT NULL,
+  `STATE` varchar(45) NOT NULL,
+  `CITY` varchar(45) NOT NULL,
+  `ADDRESS_TYPE` varchar(45) NOT NULL,
+  PRIMARY KEY (`ID`),
+  KEY `EMPLOYEE_ID` (`EMPLOYEE_ID`),
+  CONSTRAINT `address_ibfk_1` FOREIGN KEY (`EMPLOYEE_ID`) REFERENCES `employee` (`ID`)
 );
 
-create table EMPLOYEE_JOB_DETAILS (
-  ID integer unsigned not null auto_increment,
-  EMPLOYEE_ID integer unsigned not null,
-  DEPARTMENT varchar(45) not null,
-  ROLE varchar(45) not null,
-  DATE_OF_JOINING date not null,
-  primary key (ID),
-  foreign key (EMPLOYEE_ID) references EMPLOYEE_PERSONAL_DETAILS(ID) 
+CREATE TABLE `employee` (
+  `ID` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `FIRST_NAME` varchar(45) NOT NULL,
+  `MIDDLE_NAME` varchar(45) DEFAULT NULL,
+  `LAST_NAME` varchar(45) NOT NULL,
+  `DATE_OF_BIRTH` date NOT NULL,
+  `NATIONALITY` varchar(45) NOT NULL,
+  `GENDER` varchar(45) NOT NULL,
+  `PHONE_NUMBER` varchar(13) NOT NULL,
+  `EMAIL` varchar(45) NOT NULL,
+  `STATUS` tinyint(1) NOT NULL,
+  PRIMARY KEY (`ID`)
 );
 
-create table EMPLOYEE_ADDRESS_DETAILS (
-	ID integer unsigned not null auto_increment,
-	EMPLOYEE_ID integer unsigned not null,
-	STREET varchar(45) not null,
-  	COUNTRY varchar(45) not null,
-  	STATE varchar(45) not null,
-  	CITY varchar(45) not null,
-  	primary key (ID),
-  	foreign key (EMPLOYEE_ID) references EMPLOYEE_PERSONAL_DETAILS(ID)
+CREATE TABLE `employee_job_details` (
+  `ID` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `EMPLOYEE_ID` int(10) unsigned NOT NULL,
+  `DEPARTMENT_ID` int(10) unsigned NOT NULL,
+  `ROLE_ID` int(10) unsigned NOT NULL,
+  `DATE_OF_JOINING` date NOT NULL,
+  PRIMARY KEY (`ID`),
+  KEY `EMPLOYEE_ID` (`EMPLOYEE_ID`),
+  CONSTRAINT `EMPLOYEE_ID` FOREIGN KEY (`EMPLOYEE_ID`) REFERENCES `employee` (`ID`),
+  CONSTRAINT `DEPARTMENT_ID` FOREIGN KEY (`ID`) REFERENCES `department` (`ID`),
+  CONSTRAINT `ROLE_ID` FOREIGN KEY (`ID`) REFERENCES `role` (`ID`)
 );
-
-

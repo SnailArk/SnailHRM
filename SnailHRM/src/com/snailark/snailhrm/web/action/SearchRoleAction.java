@@ -22,7 +22,7 @@ public class SearchRoleAction extends BaseActionSupport {
 	}
 	public String execute() {
 		ConfigurationService configurationService = new ConfigurationService();
-		listRole =  configurationService.searchList();
+		listRole =  configurationService.searchRole();
 		return SUCCESS;
 	}
 
