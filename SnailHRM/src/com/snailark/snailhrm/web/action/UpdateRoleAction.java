@@ -3,6 +3,7 @@ package com.snailark.snailhrm.web.action;
 import org.apache.commons.lang.StringUtils;
 
 import com.snailark.snailhrm.BizException;
+import com.snailark.snailhrm.ExceptionCategory;
 import com.snailark.snailhrm.SystemException;
 import com.snailark.snailhrm.model.RoleVO;
 import com.snailark.snailhrm.service.ConfigurationService;
@@ -31,17 +32,22 @@ public class UpdateRoleAction extends BaseActionSupport {
 			try {
 				configurationService.updateRole(roleVO);
 			} catch (SystemException e) {
-				addActionError("Error while saving the role.");
+				addActionError(ExceptionCategory.SYSTEM.getMessage());
 				return ERROR;
 			} catch (BizException e) {
-				addActionError("Role name already exist");
+				addActionError(ExceptionCategory.ROLE_ALREADY_EXISTS.getMessage());
 				return ERROR;
 			}
 			return SUCCESS;
 		} else {
 			RoleVO roleVO = new RoleVO();
 			roleVO.setId(getId());
+			try {
+				
 			roleVO = configurationService.findRoleById(roleVO);
+			} catch(SystemException se) {
+				addActionError(ExceptionCategory.SYSTEM.getMessage());
+			}
 			setRoleVO(roleVO);
 			return "update";
 		}

@@ -6,6 +6,8 @@ import java.util.Date;
 import org.apache.commons.lang.StringUtils;
 
 import com.snailark.snailhrm.BizException;
+import com.snailark.snailhrm.ExceptionCategory;
+import com.snailark.snailhrm.SystemException;
 import com.snailark.snailhrm.model.RoleVO;
 import com.snailark.snailhrm.service.ConfigurationService;
 
@@ -40,6 +42,9 @@ public class AddRoleAction extends BaseActionSupport {
 				return SUCCESS;
 			} catch (BizException se) {
 				addActionError(se.getExceptionCategory().getMessage());
+				return ERROR;
+			} catch(SystemException se) {
+				addActionError(ExceptionCategory.SYSTEM.getMessage());
 				return ERROR;
 			}
 		}

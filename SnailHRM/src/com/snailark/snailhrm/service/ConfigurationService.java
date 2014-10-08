@@ -1,5 +1,6 @@
 package com.snailark.snailhrm.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.HibernateException;
@@ -7,6 +8,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import com.snailark.snailhrm.BizException;
+import com.snailark.snailhrm.ExceptionCategory;
 import com.snailark.snailhrm.SystemException;
 import com.snailark.snailhrm.facade.ConfigurationFacade;
 import com.snailark.snailhrm.model.DepartmentVO;
@@ -16,7 +18,7 @@ import com.snailark.snailhrm.util.HibernateUtils;
 
 public class ConfigurationService {
 
-	public void addDepartment(DepartmentVO departmentVO) throws BizException, HibernateException {
+	public void addDepartment(DepartmentVO departmentVO) throws BizException, SystemException {
 		Session session = HibernateUtils.getFactoryObject().getCurrentSession();
 		Transaction transaction = session.beginTransaction();
 		ConfigurationFacade configurationFacade = new ConfigurationFacade();
@@ -26,26 +28,33 @@ public class ConfigurationService {
 		} catch (BizException be ) {
 			transaction.rollback();
 			throw be;
+		} catch(HibernateException he) {
+			throw new SystemException(ExceptionCategory.SYSTEM);
 		}
 	}
 
-	public List<DepartmentVO> searchDepartment() throws HibernateException{
+	public List<DepartmentVO> searchDepartment() throws SystemException {
 		Session session = HibernateUtils.getFactoryObject().getCurrentSession();
 		Transaction transaction = session.beginTransaction();
 		ConfigurationFacade configurationFacade = new ConfigurationFacade();
-		List<DepartmentVO> deaprtmentsList = configurationFacade
-				.searchDepartment();
+		List<DepartmentVO> deaprtmentsList = new ArrayList<DepartmentVO>();
+		try {
+			
+		deaprtmentsList = configurationFacade.searchDepartment();
 		transaction.commit();
+		} catch(HibernateException he) {
+			throw new SystemException(ExceptionCategory.SYSTEM);
+		}
 		return deaprtmentsList;
 
 	}
 
 	public void updateDepartment(DepartmentVO departmentVO)
-			throws SystemException, BizException, HibernateException {
+			throws SystemException, BizException {
 		Session session = HibernateUtils.getFactoryObject().getCurrentSession();
 		Transaction transaction = session.beginTransaction();
+		ConfigurationFacade configurationFacade = new ConfigurationFacade();
 		try {
-			ConfigurationFacade configurationFacade = new ConfigurationFacade();
 			configurationFacade.updateDepartment(departmentVO);
 			transaction.commit();
 		} catch (SystemException se) {
@@ -54,20 +63,29 @@ public class ConfigurationService {
 		} catch (BizException be) {
 			transaction.rollback();
 			throw be;
+		} catch(HibernateException he) {
+			transaction.rollback();
+			throw new SystemException(ExceptionCategory.SYSTEM);
 		}
 	}
 
-	public DepartmentVO findDepartmentById(DepartmentVO departmentVO) {
+	public DepartmentVO findDepartmentById(DepartmentVO requestVO) throws SystemException {
 		Session session = HibernateUtils.getFactoryObject().getCurrentSession();
 		Transaction transaction = session.beginTransaction();
 		ConfigurationFacade configurationFacade = new ConfigurationFacade();
-		DepartmentVO departmentVO2 = configurationFacade
-				.findDepartmentById(departmentVO);
+		DepartmentVO departmentVO = new DepartmentVO();
+		try {
+			
+		departmentVO = configurationFacade.findDepartmentById(requestVO);
 		transaction.commit();
-		return departmentVO2;
+		} catch(HibernateException he) {
+			transaction.rollback();
+			throw new SystemException(ExceptionCategory.SYSTEM);
+		}
+		return departmentVO;
 	}
 
-	public void addRole(RoleVO roleVO) throws BizException {
+	public void addRole(RoleVO roleVO) throws BizException, SystemException {
 		Session session = HibernateUtils.getFactoryObject().getCurrentSession();
 		Transaction transaction = session.beginTransaction();
 		ConfigurationFacade configurationFacade = new ConfigurationFacade();
@@ -78,15 +96,25 @@ public class ConfigurationService {
 		} catch (BizException be) {
 			transaction.rollback();
 			throw be;
+		} catch(HibernateException he) {
+			transaction.rollback();
+			throw new SystemException(ExceptionCategory.SYSTEM);
 		}
 	}
 	
-	public List<RoleVO> searchRole() {
+	public List<RoleVO> searchRole() throws SystemException {
 		Session session = HibernateUtils.getFactoryObject().getCurrentSession();
 		Transaction transaction = session.beginTransaction();
 		ConfigurationFacade configurationFacade = new ConfigurationFacade();
-		List<RoleVO> roleList = configurationFacade.searchRole();
+		List<RoleVO> roleList = new ArrayList<RoleVO>();
+		try {
+			
+		roleList = configurationFacade.searchRole();
 		transaction.commit();
+		} catch(HibernateException he) {
+			transaction.rollback();
+			throw new SystemException(ExceptionCategory.SYSTEM);
+		}
 		return roleList;
 
 	}
@@ -104,20 +132,29 @@ public class ConfigurationService {
 		} catch (BizException be) {
 			transaction.rollback();
 			throw be;
+		} catch(HibernateException he) {
+			transaction.rollback();
+			throw new SystemException(ExceptionCategory.SYSTEM);
 		}
 	}
 	
-	public RoleVO findRoleById(RoleVO roleVO) {
+	public RoleVO findRoleById(RoleVO requestVO) throws SystemException {
 		Session session = HibernateUtils.getFactoryObject().getCurrentSession();
 		Transaction transaction = session.beginTransaction();
 		ConfigurationFacade configurationFacade = new ConfigurationFacade();
-		RoleVO roleVO2 = configurationFacade
-				.findRoleById(roleVO);
+		RoleVO roleVO = new RoleVO();
+		try {
+			
+		roleVO = configurationFacade.findRoleById(requestVO);
 		transaction.commit();
-		return roleVO2;
+		} catch(HibernateException he) {
+			transaction.rollback();
+			throw new SystemException(ExceptionCategory.SYSTEM);
+		}
+		return roleVO;
 	}
 
-	public void addEmployee(EmployeeVO employeeVO) throws BizException {
+	public void addEmployee(EmployeeVO employeeVO) throws BizException, SystemException {
 		Session session = HibernateUtils.getFactoryObject().getCurrentSession();
 		Transaction transaction = session.beginTransaction();
 		ConfigurationFacade configurationFacade = new ConfigurationFacade();
@@ -127,6 +164,9 @@ public class ConfigurationService {
 		} catch (BizException be ) {
 			transaction.rollback();
 			throw be;
+		} catch(HibernateException he) {
+			transaction.rollback();
+			throw new SystemException(ExceptionCategory.SYSTEM);
 		}
 	}
 }

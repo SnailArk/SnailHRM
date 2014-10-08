@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.hibernate.HibernateException;
 
+import com.snailark.snailhrm.ExceptionCategory;
+import com.snailark.snailhrm.SystemException;
 import com.snailark.snailhrm.model.DepartmentVO;
 import com.snailark.snailhrm.service.ConfigurationService;
 
@@ -34,8 +36,8 @@ public class SearchDepartmentAction extends BaseActionSupport {
 			
 			listDepartment =  configurationService.searchDepartment();
 			return SUCCESS;
-		} catch(HibernateException he) {
-			he.printStackTrace();
+		} catch(SystemException se) {
+			addActionError(ExceptionCategory.SYSTEM.getMessage());
 			return ERROR;
 		}
 	}

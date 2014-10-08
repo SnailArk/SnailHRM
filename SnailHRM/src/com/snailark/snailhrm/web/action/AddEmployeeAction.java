@@ -8,6 +8,8 @@ import java.util.Set;
 import org.hibernate.HibernateException;
 
 import com.snailark.snailhrm.BizException;
+import com.snailark.snailhrm.ExceptionCategory;
+import com.snailark.snailhrm.SystemException;
 import com.snailark.snailhrm.model.AddressType;
 import com.snailark.snailhrm.model.AddressVO;
 import com.snailark.snailhrm.model.DepartmentVO;
@@ -105,8 +107,8 @@ public class AddEmployeeAction extends BaseActionSupport {
 			} catch (BizException se) { // catch exception work have to do.
 				addActionError(se.getExceptionCategory().getMessage());
 				retVal = ERROR;
-			} catch(HibernateException he) {
-				he.printStackTrace();
+			} catch(SystemException se) {
+				addActionError(ExceptionCategory.SYSTEM.getMessage());
 				retVal = ERROR;
 			}
 		}
@@ -115,8 +117,12 @@ public class AddEmployeeAction extends BaseActionSupport {
 
 	private void setView() {
 		ConfigurationService configurationService = new ConfigurationService();
-
-		List<DepartmentVO> departmentList = configurationService.searchDepartment();
+		List<DepartmentVO> departmentList = new ArrayList<DepartmentVO>();
+		try {
+		departmentList = configurationService.searchDepartment();
+		} catch(SystemException se) {
+			addActionError(ExceptionCategory.SYSTEM.getMessage());
+		}
 		Option option = new Option();
 		option.setLabel("Select Department");
 		option.setValue(-1);
@@ -127,8 +133,13 @@ public class AddEmployeeAction extends BaseActionSupport {
 			option.setValue(departmentVO.getId());
 			departmentOptionList.add(option);
 		}
-		
-		List<RoleVO> roleList = configurationService.searchRole();
+		List<RoleVO> roleList = new ArrayList<RoleVO>();
+		try {
+			
+		roleList = configurationService.searchRole();
+		} catch(SystemException se) {
+			addActionError(ExceptionCategory.SYSTEM.getMessage());
+		}
 		option = new Option();
 		option.setLabel("Select Role");
 		option.setValue(-1);

@@ -5,6 +5,7 @@ import org.apache.commons.lang.StringUtils;
 import org.hibernate.HibernateException;
 
 import com.snailark.snailhrm.BizException;
+import com.snailark.snailhrm.ExceptionCategory;
 import com.snailark.snailhrm.SystemException;
 import com.snailark.snailhrm.model.DepartmentVO;
 import com.snailark.snailhrm.service.ConfigurationService;
@@ -39,21 +40,22 @@ public class UpdateDepartmentAction extends BaseActionSupport {
 			try {
 				configurationService.updateDepartment(departmentVO);
 			} catch (SystemException e) {
-				addActionError("Error while saving the department.");
+				addActionError(ExceptionCategory.SYSTEM.getMessage());
 				return ERROR;
 			} catch (BizException e) {
-				addActionError("Department name already exist");
+				addActionError(ExceptionCategory.DEPARTMENT_ALREADY_EXISTS.getMessage());
 				return ERROR;
-			} catch(HibernateException he) {
-				he.printStackTrace();
-				return ERROR;
-			}
+			} 
 			return SUCCESS;
 		} else {
 			DepartmentVO departmentVO = new DepartmentVO();
 			departmentVO.setId(getId());
-			departmentVO = configurationService
-					.findDepartmentById(departmentVO);
+			try {
+				
+			departmentVO = configurationService.findDepartmentById(departmentVO);
+			} catch(SystemException se) {
+				addActionError(ExceptionCategory.SYSTEM.getMessage());
+			}
 			setDepartmentVO(departmentVO);
 			return "update";
 		}
