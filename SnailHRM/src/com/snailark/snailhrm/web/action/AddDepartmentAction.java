@@ -35,21 +35,22 @@ public class AddDepartmentAction extends BaseActionSupport {
 
 	@Override
 	public String execute() {
+		String retVal = "addDepartment";
 		if ((getSubmit() != null) && SUBMIT.equals(getSubmit())) {
 			ConfigurationService configurationService = new ConfigurationService();
 			try {
 				configurationService.addDepartment(departmentVO);
 				this.setId(departmentVO.getId());
-				return SUCCESS;
+				retVal = SUCCESS;
 			} catch (BizException se) {
 				addActionError(se.getExceptionCategory().getMessage());
-				return ERROR;
+				retVal = ERROR;
 			} catch(SystemException se) {
 				addActionError(ExceptionCategory.SYSTEM.getMessage());
-				return ERROR;
+				retVal = ERROR;
 			}
 		}
-		return "addDepartment";
+		return retVal;
 	}
 
 	@Override

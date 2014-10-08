@@ -35,18 +35,19 @@ public class UpdateDepartmentAction extends BaseActionSupport {
 
 	@Override
 	public String execute() {
+		String retVal = "update"; 
 		ConfigurationService configurationService = new ConfigurationService();
 		if (SUBMIT.equals(getSubmit())) {
 			try {
 				configurationService.updateDepartment(departmentVO);
+				retVal = SUCCESS;
 			} catch (SystemException e) {
 				addActionError(ExceptionCategory.SYSTEM.getMessage());
-				return ERROR;
+				retVal = ERROR;
 			} catch (BizException e) {
 				addActionError(ExceptionCategory.DEPARTMENT_ALREADY_EXISTS.getMessage());
-				return ERROR;
+				retVal = ERROR;
 			} 
-			return SUCCESS;
 		} else {
 			DepartmentVO departmentVO = new DepartmentVO();
 			departmentVO.setId(getId());
@@ -55,10 +56,11 @@ public class UpdateDepartmentAction extends BaseActionSupport {
 			departmentVO = configurationService.findDepartmentById(departmentVO);
 			} catch(SystemException se) {
 				addActionError(ExceptionCategory.SYSTEM.getMessage());
+				retVal = ERROR;
 			}
 			setDepartmentVO(departmentVO);
-			return "update";
 		}
+		return retVal;
 	}
 
 	@Override

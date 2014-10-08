@@ -28,17 +28,18 @@ public class UpdateRoleAction extends BaseActionSupport {
 	@Override
 	public String execute() {
 		ConfigurationService configurationService = new ConfigurationService();
+		String retVal = "update";
 		if (SUBMIT.equals(getSubmit())) {
 			try {
 				configurationService.updateRole(roleVO);
+				retVal = SUCCESS;
 			} catch (SystemException e) {
 				addActionError(ExceptionCategory.SYSTEM.getMessage());
-				return ERROR;
+				retVal = ERROR;
 			} catch (BizException e) {
 				addActionError(ExceptionCategory.ROLE_ALREADY_EXISTS.getMessage());
-				return ERROR;
+				retVal = ERROR;
 			}
-			return SUCCESS;
 		} else {
 			RoleVO roleVO = new RoleVO();
 			roleVO.setId(getId());
@@ -47,10 +48,11 @@ public class UpdateRoleAction extends BaseActionSupport {
 			roleVO = configurationService.findRoleById(roleVO);
 			} catch(SystemException se) {
 				addActionError(ExceptionCategory.SYSTEM.getMessage());
+				retVal = ERROR;
 			}
 			setRoleVO(roleVO);
-			return "update";
 		}
+		return retVal;
 	}
 	
 	@Override

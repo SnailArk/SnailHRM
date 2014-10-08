@@ -30,6 +30,7 @@ public class AddRoleAction extends BaseActionSupport {
 	}
 	
 	public String execute() {
+		String retVal = "addRole";
 		if (SUBMIT.equals(getSubmit())) {
 			Calendar calendar = Calendar.getInstance();
 			Date createdDate = calendar.getTime();
@@ -39,16 +40,16 @@ public class AddRoleAction extends BaseActionSupport {
 			try {
 				configurationService.addRole(roleVO);
 				this.setId(roleVO.getId());
-				return SUCCESS;
+				retVal = SUCCESS;
 			} catch (BizException se) {
 				addActionError(se.getExceptionCategory().getMessage());
-				return ERROR;
+				retVal = ERROR;
 			} catch(SystemException se) {
 				addActionError(ExceptionCategory.SYSTEM.getMessage());
-				return ERROR;
+				retVal = ERROR;
 			}
 		}
-		return "addRole";
+		return retVal;
 	}
 	
 	@Override

@@ -24,15 +24,16 @@ public class SearchRoleAction extends BaseActionSupport {
 		this.listRole = listRole;
 	}
 	public String execute() {
+		String retVal = SUCCESS;
 		ConfigurationService configurationService = new ConfigurationService();
 		try {
 			
 			listRole =  configurationService.searchRole();
 		} catch(SystemException se) {
 			addActionError(ExceptionCategory.SYSTEM.getMessage());
-			return ERROR;
+			retVal = ERROR;
 		}
-		return SUCCESS;
+		return retVal;
 	}
 
 }

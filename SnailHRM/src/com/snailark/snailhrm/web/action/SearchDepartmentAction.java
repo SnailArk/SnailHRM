@@ -31,15 +31,16 @@ public class SearchDepartmentAction extends BaseActionSupport {
 	}
 	
 	public String execute() {
+		String retVal = SUCCESS;
 		ConfigurationService configurationService = new ConfigurationService();
 		try {
 			
 			listDepartment =  configurationService.searchDepartment();
-			return SUCCESS;
 		} catch(SystemException se) {
 			addActionError(ExceptionCategory.SYSTEM.getMessage());
-			return ERROR;
+			retVal = ERROR;
 		}
+		return retVal;
 	}
 	
 }
