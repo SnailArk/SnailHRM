@@ -31,7 +31,7 @@
 				<div class=heading>
 					<b><div style="padding: 7px;">
 							Employees List (
-							<s:property value="listEmployee.size" />
+							<s:property value="employeeList.size" />
 							) <span style="margin: 317px;"></span> <a href="addEmployee">Add</a></b>
 				</div>
 			</div>
@@ -42,20 +42,20 @@
 					<th width="13%">Middle Name</th>
 					<th width="13%">Last Name</th>
 					<th width="13%">Department</th>
-					<th width="13%">Role</th>
+ 					<th width="13%">Role</th>
 					<th width="13%">Date of Joining</th>
-					<th width="13%">Status</th>
+ 					<th width="13%">Status</th>
 				</tr>
-				<s:iterator value='listEmployee' status="rowstatus">
+				<s:iterator value='employeeList' status="rowstatus">
 					<tr align="center"
 						class="<s:if test="#rowstatus.odd == true ">odd</s:if><s:else>even</s:else>">
 						<td width="40%"><a
 							href="updateEmployee?id=<s:property value="id"/>"><s:property
 									value='firstName' /></a></td>
-						<td width="13%"><s:property value='lastName' /></td>
 						<td width="13%"><s:property value='middleName' /></td>
 						<td width="13%"><s:property value='lastName' /></td>
-						<td width="13%"><s:property value='department' /></td>
+						<td width="13%"><s:property value="department"/></td>
+						<td width="13%"><s:property value='jobDetails' /></td>
 						<td width="13%"><s:property value='role' /></td>
 						<td width="13%"><s:property value='dateOfJoining' /></td>
 						<td width="13%"><s:property value='status' /></td>

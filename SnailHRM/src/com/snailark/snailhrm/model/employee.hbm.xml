@@ -19,18 +19,18 @@
 		<property name="email" column="EMAIL"></property>
 		<property name="status" column="STATUS" ></property>
 		
-		<set name="addresses" inverse="true" lazy="false" cascade="all">
+		<set name="addresses" inverse="false" lazy="false" cascade="all">
             <key>
                 <column name="EMPLOYEE_ID" precision="18" scale="0" not-null="true" />
             </key>
             <one-to-many class="AddressVO"/>
         </set>
 		
-		<set name="jobDetails" inverse="true" lazy="false" cascade="all">
+		<set name="jobDetails" inverse="false" lazy="false" cascade="all">
             <key>
                 <column name="EMPLOYEE_ID" precision="18" scale="0" not-null="true" />
             </key>
             <one-to-many class="EmployeeJobDetailsVO"/>
         </set>
 	</class>
-</hibernate-mapping> 
+</hibernate-mapping>

@@ -169,4 +169,22 @@ public class ConfigurationService {
 			throw new SystemException(ExceptionCategory.SYSTEM);
 		}
 	}
+	
+	
+	
+	public List<EmployeeVO> searchEmployee(EmployeeVO employeeVO) throws SystemException {
+		Session session = HibernateUtils.getFactoryObject().getCurrentSession();
+		Transaction transaction = session.beginTransaction();
+		List<EmployeeVO> employeesList = new ArrayList<EmployeeVO>();
+		ConfigurationFacade configurationFacade = new ConfigurationFacade();
+		try {			
+		employeesList = configurationFacade.searchEmployee(employeeVO);
+		transaction.commit();
+		} catch(HibernateException he) {
+			transaction.rollback();
+			throw new SystemException(ExceptionCategory.SYSTEM);
+		}
+		return employeesList;
+
+	}
 }

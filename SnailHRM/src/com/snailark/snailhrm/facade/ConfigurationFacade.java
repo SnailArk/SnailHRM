@@ -1,6 +1,7 @@
 package com.snailark.snailhrm.facade;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.snailark.snailhrm.BizException;
@@ -104,6 +105,13 @@ public class ConfigurationFacade {
 		else {
 			throw new BizException(ExceptionCategory.EMPLOYEE_ALREADY_EXISTS);
 		}
+	}
+	
+	
+	public List<EmployeeVO> searchEmployee(EmployeeVO employeeVO) {
+		EmployeeDAO employeeDAO = new EmployeeDAO();
+		List<EmployeeVO> listEmployees = employeeDAO.searchEmployee(employeeVO);
+		return listEmployees;
 	}
 	
 }
